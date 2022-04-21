@@ -2,9 +2,30 @@ import React from "react";
 
 export const GameScreen = ({ verifyLetter }) => {
   return (
-    <>
-      <h1>GameScreen</h1>
-      <button onClick={verifyLetter}>Finalizar o jogo</button>
-    </>
+    <div className="game">
+      <p className="points">
+        <span>Pontuação: 000</span>
+      </p>
+      <h1>Advinhe a palavra:</h1>
+      <h3 className="tip">
+        Dica sobre a palavra: <span>Dica...</span>
+      </h3>
+      <div className="wordConteiner">
+        <span className="letter">A</span>
+        <span className="blackSquare"></span>
+      </div>
+      <div className="letterContainer">
+        <p>Tente advinhar uma letra da palavra:</p>
+        <form action="">
+          <input type="text" name="letter" id="letter" maxLength={1} required />
+          <button>Jogar</button>
+        </form>
+      </div>
+      <div className="wrongLetterContainer">
+        <p>Letras já utilizadas:</p>
+        <span>a,</span>
+        <span>b,</span>
+      </div>
+    </div>
   );
 };

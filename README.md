@@ -293,38 +293,72 @@ const pickWordAndCategory = () => {
   };
 
   //retornamos word e category
-  return {word,category};
+  return { word, category };
 };
 ```
 
 Com isso conseguimos destruturar a palavra e a categoria
 
 ```tsx
-const {word,category} = pickWordAndCategory();
+const { word, category } = pickWordAndCategory();
 ```
 
 Agora precisamo pegar a palavra e transformar ela em um array cada letra
 
 ```tsx
-
-let wordLetters = word.split('')
-
+let wordLetters = word.split("");
 ```
 
 Agora precisamos pegar cada letra do array e colocar todas em minusculo
 
 ```tsx
-
-wordLetters = wordLetters.map(l=> l.lowerCase())
-
+wordLetters = wordLetters.map((l) => l.lowerCase());
 ```
 
-Agora setamos os estados fill states 
+Agora setamos os estados fill states
 
 ```tsx
-
-   setPickedWord(word)
-   setPickedCategory(category)
-   setLetters(wordLetters) 
-
+setPickedWord(word);
+setPickedCategory(category);
+setLetters(wordLetters);
 ```
+
+## Estruturando o componente GameScreen
+
+```tsx
+import React from "react";
+
+export const GameScreen = ({ verifyLetter }) => {
+  return (
+    <div className="game">
+      <p className="points">
+        <span>Pontuação: 000</span>
+      </p>
+      <h1>Advinhe a palavra:</h1>
+      <h3 className="tip">
+        Dica sobre a palavra: <span>Dica...</span>
+      </h3>
+      <div className="wordConteiner">
+        <span className="letter">A</span>
+        <span className="blackSquare"></span>
+      </div>
+      <div className="letterContainer">
+        <p>Tente advinhar uma letra da palavra:</p>
+        <form action="">
+          <input type="text" name="letter" id="letter" maxLength={1} required />
+          <button>Jogar</button>
+        </form>
+      </div>
+      <div className="wrongLetterContainer">
+        <p>Letras já utilizadas:</p>
+        <span>a,</span>
+        <span>b,</span>
+      </div>
+    </div>
+  );
+};
+```
+
+## Estilizando o component GameScreen
+
+
