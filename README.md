@@ -42,10 +42,6 @@ Criando o component
 src/components/StartScreen.js
 
 ```tsx
-import "./StartScreen.css";
-
-import React from "react";
-
 export const StartScreen = () => {
   return (
     <div>
@@ -180,19 +176,80 @@ const [word] = useState(wordsList);
 //   );
 // }
 ```
+
 ## Exibindo todos components do game
 
-No component startscreen 
-criamos uma funcao que comeca o jogo 
+No component startscreen
+criamos uma funcao que comeca o jogo
+
 ```tsx
- // pegando o proximo estado game 
+// pegando o proximo estado game
 const startGame = () => {
-    setGameStage(stages[1].name)
-}
+  setGameStage(stages[1].name);
+};
 
 //passando a funcao startGame para o component StartScreen
 
+//  return (
+//     <div className="App">
+{
+  gameStage === "start" && <StartScreen startGame={startGame} />;
+}
+//       {gameStage === "game" && <GameScreen />}
+//       {gameStage === "end" && <EndScreen />}
+//     </div>
+//   );
+// }
+```
+
+no StartScreen.js
+
+```tsx
+
+    passamos a propiedade startGame e no button colocamos onClick
 
 
+export const StartScreen = ({startGame}) => {
+//   return (
+//     <div className="start">
+//       <h1>Secret Word</h1>
+//       <p>Clique no botão abaixo para começar a jogar</p>
+      <button onClick={startGame}>Começar o jogo</button>
+//     </div>
+//   );
+// };
 
+```
+
+Criando uma funcao que vai processar o que for digitado no input
+
+App.js
+
+```tsx
+const verifyLetter = () => {
+  // passando o end para o estagio
+  setGameStage(stages[2].name);
+};
+
+// passando a funcao para o component GameScreen
+{
+  gameStage === "game" && <GameScreen verifyLetter={verifyLetter} />;
+}
+
+// colocando a propiedade verifyLetter no GameScreen
+
+export const GameScreen = ({ verifyLetter }) => {
+  return (
+    <>
+      <h1>GameScreen</h1>
+      <button onClick={verifyLetter}>Verify</button>
+    </>
+  );
+};
+
+// Criando mais uma funcao para iniciar o jogo 
+
+const retry = () => {
+    setGameStage(stages[0].name)
+}
 ```
