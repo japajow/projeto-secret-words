@@ -108,3 +108,91 @@ button:hover {
   background-color: #0923af;
 }
 ```
+
+## Criando a pagina do jogo
+
+importando os hooks que vamos utilizar
+
+App.js
+
+```tsx
+import { useEffect, useCallback, useState } from "react";
+```
+
+Importando as palavras data/word.js
+
+```tsx
+import { wordList } from "./data/word";
+```
+
+Temos 3 estagios no nosso jogo , start, game, end
+
+```tsx
+const stages = [
+  { id: 1, name: "start" },
+  { id: 2, name: "game" },
+  { id: 3, name: "end" },
+];
+```
+
+Criando o estado do jogo
+
+```tsx
+// setando o start do jogo
+const [gameStage, setGameStage] = useState(stage[0].name);
+```
+
+Vamos mostrar a pagina start quando o estado for start
+
+```tsx
+// function App() {
+  const [gameStage, setGameStage] = useState(stages[0].name);
+//   return <div className="App">
+  // quando for igual a start
+  {gameStage === "start" && <StartScreen />}</div>;
+  // quando for igual a game
+  {gameStage === "start" && <GameScreen />}</div>;
+  // quando for igual a end
+  {gameStage === "start" && <EndScreen />}</div>;
+// }
+```
+
+Criando as paginas no componend EndScreen e GameScreen
+
+src/components/GameScreen/GameSreen.js
+src/components/GameScreen/GameSreen.css
+
+src/components/EndScreen/EndSreen.js
+src/components/EndScreen/EndSreen.css
+
+criando o estado das palavras
+
+```tsx
+// function App() {
+//   const [gameStage,setGameStage] = useState(stages[0].name)
+const [word] = useState(wordsList);
+//   return (
+//     <div className="App">
+//       {gameStage === 'start' && <StartScreen />}
+//       {gameStage === 'game' && <GameScreen />}
+//       {gameStage === 'end' && <EndScreen/>}
+//     </div>
+//   );
+// }
+```
+## Exibindo todos components do game
+
+No component startscreen 
+criamos uma funcao que comeca o jogo 
+```tsx
+ // pegando o proximo estado game 
+const startGame = () => {
+    setGameStage(stages[1].name)
+}
+
+//passando a funcao startGame para o component StartScreen
+
+
+
+
+```
