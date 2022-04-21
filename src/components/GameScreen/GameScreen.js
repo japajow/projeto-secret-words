@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./GameScreen.css";
 export const GameScreen = ({
   verifyLetter,
@@ -10,6 +10,17 @@ export const GameScreen = ({
   guesses,
   score,
 }) => {
+  const [letter, setLetter] = useState("");
+  const letterInputRef = useRef(null)
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+
+    verifyLetter(letter)
+    setLetter('')
+    letterInputRef.current.focus()
+  }
+
   return (
     <div className="game">
       <p className="points">
@@ -23,7 +34,9 @@ export const GameScreen = ({
       <div className="wordContainer">
         {letters.map((letter, i) =>
           guessedLetter.includes(letter) ? (
-            <span className="letter" key={i}>{guessedLetter}</span>
+            <span className="letter" key={i}>
+              {guessedLetter}
+            </span>
           ) : (
             <span className="blackSquare" key={i}></span>
           )
@@ -31,16 +44,25 @@ export const GameScreen = ({
       </div>
       <div className="letterContainer">
         <p>Tente advinhar uma letra da palavra:</p>
-        <form action="">
-          <input type="text" name="letter" id="letter" maxLength={1} required />
+        <form onSubmit={handleSubmit}>
+          <input
+            ref={letterInputRef}
+            type="text"
+            name="letter"
+            id="letter"
+            maxLength={1}
+            required
+            value={letter}
+            onChange={(e) => setLetter(e.target.value)}
+          />
           <button>Jogar</button>
         </form>
       </div>
       <div className="wrongLetterContainer">
         <p>Letras já utilizadas:</p>
-       {wrongLetters.map((letter,i) =>(
-         <span key={i}>{letter}, </span>
-       ))}
+        {wrongLetters.map((letter, i) => (
+          <span key={i}>{letter}, </span>
+        ))}
       </div>
     </div>
   );

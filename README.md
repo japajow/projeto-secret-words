@@ -498,3 +498,89 @@ export const GameScreen = ({
   );
 };
 ```
+
+# evento dr insercao de letra
+
+Criando um estado para a letra digitada pelo formulario
+
+```tsx
+
+const [letter , setLetter] = useState('')
+
+//Pegando as informacao do input pelo OnChange
+
+ <input
+            type="text"
+            name="letter"
+            id="letter"
+            maxLength={1}
+            required
+            value={letter}
+            onChange={(e) => setLetter(e.target.value)}
+          />
+
+// passando o onSubmit no formulario
+
+   <form onSubmit={handleSubmit} />
+
+// Criando o handleSubmit
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        //verificando o  letter passado pelo input
+
+        verifyLetter(letter)
+
+        // limpando o input
+        setLetter('')
+
+        //focando novamente no input
+
+
+    }
+
+```
+
+Para focar novamente no input precisamos de usar o Hook useRef
+
+criando uma referencia
+
+```tsx
+const letterInputRef = useref(null);
+
+// vamos no input e criamos um atributo novo chamado ref
+//  <input
+ref = { letterInputRef };
+//     type="text"
+//     name="letter"
+//     id="letter"
+//     maxLength={1}
+//     required
+//     value={letter}
+//     onChange={(e) => setLetter(e.target.value)}
+//   />
+
+// agora novamente na funcao handleSubmit
+
+const handleSubmit = (e) => {
+  // e.preventDefault()
+
+  // //verificando o  letter passado pelo input
+
+  // verifyLetter(letter)
+
+  // // limpando o input
+  // setLetter('')
+
+  //focando novamente no input
+  letterInputRef.current.focus();
+};
+```
+
+modificando o verifyLetter para verificar as letras digitadas
+
+```tsx
+const verifyLetter = (letter) => {
+  console.log(letter);
+};
+```
