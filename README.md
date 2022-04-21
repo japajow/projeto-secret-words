@@ -412,3 +412,89 @@ export const GameScreen = ({ verifyLetter }) => {
   margin-right: 1em;
 }
 ```
+
+## Consumindo estados do jogo
+
+Criando os estados que faltou
+
+App.js
+
+```tsx
+const [guessedLetter, setGuessedLetter] = useState([]);
+const [wrondLetters, setWrongLetters] = useState([]);
+const [guesses, setGuesses] = useState(3);
+const [score, setScore] = useState(0);
+```
+
+> Passando os estados no component GameScreen
+
+```tsx
+{
+  gameStage === "game" && (
+    <GameScreen
+      verifyLetter={verifyLetter}
+      pickedWord={pickedWord}
+      pickedCategory={pickedCategory}
+      letters={letters}
+      guessedLetter={guessedLetter}
+      wrongLetters={wrongLetters}
+      guesses={guesses}
+      score={score}
+    />
+  );
+}
+```
+
+> Vamos no GameScreen e receber o props do estados passados acima e consumindo o html em seu determinado local
+
+```tsx
+import React from "react";
+import "./GameScreen.css";
+export const GameScreen = ({
+  verifyLetter,
+  pickedWord,
+  pickedCategory,
+  letters,
+  guessedLetter,
+  wrongLetters,
+  guesses,
+  score,
+}) => {
+  return (
+    <div className="game">
+      <p className="points">
+        <span>Pontuação: {score}</span>
+      </p>
+      <h1>Advinhe a palavra:</h1>
+      <h3 className="tip">
+        Dica sobre a palavra: <span>{pickedCategory}</span>
+      </h3>
+      <p>Você ainda tem {guesses} tentativa(s).</p>
+      <div className="wordContainer">
+        {letters.map((letter, i) =>
+          guessedLetter.includes(letter) ? (
+            <span className="letter" key={i}>
+              {guessedLetter}
+            </span>
+          ) : (
+            <span className="blackSquare" key={i}></span>
+          )
+        )}
+      </div>
+      <div className="letterContainer">
+        <p>Tente advinhar uma letra da palavra:</p>
+        <form action="">
+          <input type="text" name="letter" id="letter" maxLength={1} required />
+          <button>Jogar</button>
+        </form>
+      </div>
+      <div className="wrongLetterContainer">
+        <p>Letras já utilizadas:</p>
+        {wrongLetters.map((letter, i) => (
+          <span key={i}>{letter}, </span>
+        ))}
+      </div>
+    </div>
+  );
+};
+```
