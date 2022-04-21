@@ -35,7 +35,7 @@ export const GameScreen = ({
         {letters.map((letter, i) =>
           guessedLetter.includes(letter) ? (
             <span className="letter" key={i}>
-              {guessedLetter}
+              {letter}
             </span>
           ) : (
             <span className="blackSquare" key={i}></span>

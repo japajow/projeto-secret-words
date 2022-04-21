@@ -52,8 +52,30 @@ function App() {
   };
 
   const verifyLetter = (letter) => {
-    console.log(letter)
+    const normalizedLetter = letter.toLowerCase();
+
+    if (
+      guessedLetter.includes(normalizedLetter) ||
+      wrongLetters.includes(normalizedLetter)
+    ) {
+      return;
+    }
+
+    if (letters.includes(normalizedLetter)) {
+      setGuessedLetter((actualGuessedLetters) => [
+        ...actualGuessedLetters,
+        normalizedLetter,
+      ]);
+    } else {
+      setWrongLetters((actualWrongLetters) => [
+        ...actualWrongLetters,
+        normalizedLetter,
+      ]);
+    }
+
   };
+  console.log({ guessedLetter });
+  console.log({ wrongLetters });
 
   const retry = () => {
     setGameStage(stages[0].name);
@@ -62,16 +84,18 @@ function App() {
   return (
     <div className="App">
       {gameStage === "start" && <StartScreen startGame={startGame} />}
-      {gameStage === "game" && <GameScreen 
-      verifyLetter={verifyLetter}
-      pickedWord={pickedWord}
-      pickedCategory={pickedCategory}
-      letters={letters}
-      guessedLetter={guessedLetter}
-      wrongLetters={wrongLetters}
-      guesses={guesses}
-      score={score}
-       />}
+      {gameStage === "game" && (
+        <GameScreen
+          verifyLetter={verifyLetter}
+          pickedWord={pickedWord}
+          pickedCategory={pickedCategory}
+          letters={letters}
+          guessedLetter={guessedLetter}
+          wrongLetters={wrongLetters}
+          guesses={guesses}
+          score={score}
+        />
+      )}
       {gameStage === "end" && <EndScreen retry={retry} />}
     </div>
   );

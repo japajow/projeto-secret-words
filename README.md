@@ -584,3 +584,29 @@ const verifyLetter = (letter) => {
   console.log(letter);
 };
 ```
+
+## Processando letras validas e invalidas
+
+```tsx
+
+// padronizando a letra para ser minuscula
+const normalizedLetter = letter.toLowerCase();
+
+// verificando se ja existe a letra que foi digitada
+if(guessesLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)){
+    // se entrar em uma dessas condicao retornamos
+    return;
+}
+
+//incluindo as letras que foi acertadas ou erradas
+
+if(letters.includes(normalizedLetter)){
+    //setando as letras acertadas
+    setGuessedLetters((actualGuessedLetters)=> [...actualGuessedLetters,normalizedLetter])
+}else{
+    //setando as letras erradas
+     setWrongLetters((actualWrongLetters)=>[ ...actualWrongLetters,normalizedLetter])
+}
+
+
+```
