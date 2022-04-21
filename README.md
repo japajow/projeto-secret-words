@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+## Projeto secret words udemy com matheus
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Estilizando e formatando o css defaults
 
-## Available Scripts
+App.css
 
-In the project directory, you can run:
+```css
+.App {
+  /* Centralicando todo conteudo */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+```
 
-### `npm start`
+index.css
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```css
+html,
+body {
+  height: 100%;
+}
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+body {
+  font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+  /* Colocando degrade no back ground  */
+  background: linear-gradient(
+    180deg,
+    rgba(9, 35, 175, 1) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  color: #fff;
+}
+```
 
-### `npm test`
+> Finalizando a tela inicial
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Criando o component
+src/components/StartScreen.js
 
-### `npm run build`
+```tsx
+import "./StartScreen.css";
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+import React from "react";
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+export const StartScreen = () => {
+  return (
+    <div>
+      <h1>Secret Word</h1>
+      <p>Clique no botão abaixo para começar a jogar</p>
+      <button>Começar o jogo</button>
+    </div>
+  );
+};
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Chamando o component no App.js
 
-### `npm run eject`
+```tsx
+import "./App.css";
+import { StartScreen } from "./components/StartScreen";
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+function App() {
+  return (
+    <div className="App">
+      <StartScreen />
+    </div>
+  );
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export default App;
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+src/components/StartScreen.css
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```css
+.start h1 {
+  font-size: 3.5em;
+}
 
-## Learn More
+.start p {
+  margin-bottom: 2em;
+  color: #ecfa00;
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Estilizando o botao globamnete nboi index.css
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```css
+button {
+  background: #1646a0;
+  color: #fff;
+  padding: 0 45px;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  height: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: 0.4s;
+}
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+button:hover {
+  background-color: #0923af;
+}
+```
