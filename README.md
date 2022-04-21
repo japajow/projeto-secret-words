@@ -247,9 +247,84 @@ export const GameScreen = ({ verifyLetter }) => {
   );
 };
 
-// Criando mais uma funcao para iniciar o jogo 
+// Criando mais uma funcao para iniciar o jogo
 
 const retry = () => {
-    setGameStage(stages[0].name)
-}
+  setGameStage(stages[0].name);
+};
+```
+
+# Iniciando a funcionalidade do Jogo
+
+seleciona a categoria
+selecionar a palavra
+explode as palavras
+
+Criando 3 estados palavra , categoria , letras
+
+App.js
+
+```tsx
+const [pickedWord, setPickedWord] = useState("");
+const [pickedCategory, setPickedCategory] = useState("");
+const [letters, setLetters] = useState([]);
+
+// a funcao startGame primeiro montamos tudo o que e necessario e por ultimo chamamos o estado
+
+const pickWordAndCategory = () => {
+  //pegando a categoria pela chave do words
+
+  const [words] = useState(wordsList);
+
+  const pickWordAnCategory = () => {
+    /////// selecionando a categoria //////////////
+    const categories = Object.keys(words);
+    //pegando uma categoria pelo Math.random e o tamanho do Object.keys(categories).length
+    const category = categories[Math.random() * Object.keys(categories).length];
+
+    // para nao retornar um numero grande usamos o Math.floor para aredondar para baixo
+    const category =
+      categories[Math.floor(Math.random() * Object.keys(categories).length)];
+
+    /////// selecionando a palavra//////////////
+
+    const word =
+      words[category][Math.floor(Math.random() * words[category].length)];
+  };
+
+  //retornamos word e category
+  return {word,category};
+};
+```
+
+Com isso conseguimos destruturar a palavra e a categoria
+
+```tsx
+const {word,category} = pickWordAndCategory();
+```
+
+Agora precisamo pegar a palavra e transformar ela em um array cada letra
+
+```tsx
+
+let wordLetters = word.split('')
+
+```
+
+Agora precisamos pegar cada letra do array e colocar todas em minusculo
+
+```tsx
+
+wordLetters = wordLetters.map(l=> l.lowerCase())
+
+```
+
+Agora setamos os estados fill states 
+
+```tsx
+
+   setPickedWord(word)
+   setPickedCategory(category)
+   setLetters(wordLetters) 
+
 ```
