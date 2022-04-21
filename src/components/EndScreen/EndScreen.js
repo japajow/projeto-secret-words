@@ -1,10 +1,14 @@
 import React from "react";
-
-export const EndScreen = ({ retry }) => {
+import "./EndScreen.css";
+export const EndScreen = ({ retry, score }) => {
   return (
-    <>
-      <h1>EndScreen</h1>
+    <div>
+      <h1>Fim de Jogo!</h1>
+      <h2>
+        {" "}
+        A sua pontuação foi : <span>{score}</span>
+      </h2>
       <button onClick={retry}>Reiniciar o jogo</button>
-    </>
+    </div>
   );
 };

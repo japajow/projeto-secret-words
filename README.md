@@ -499,7 +499,7 @@ export const GameScreen = ({
 };
 ```
 
-# evento dr insercao de letra
+## evento da insercao de letra
 
 Criando um estado para a letra digitada pelo formulario
 
@@ -668,4 +668,39 @@ const retry = () => {
   setGuesses(guessQty);
   setGameStage(stages[0].name);
 };
+```
+
+## Estruturando o component EndScreen
+
+```tsx
+import React from "react";
+
+export const EndScreen = ({ retry }) => {
+  return (
+    <>
+      <h1>Fim de Jogo!</h1>
+      <h2>
+        A sua pontuação foi <span>{score}</span>
+      </h2>
+      <button onClick={retry}>Reiniciar o jogo</button>
+    </>
+  );
+};
+```
+
+No App.js passamos o score pelo component EndScreen
+
+```tsx
+{
+  gameStage === "end" && <EndScreen retry={retry} score={score} />;
+}
+```
+
+> estilizando o EndScreen
+
+```css
+h2 span {
+  color: #ecfa00;
+  font-size: 1.5em;
+}
 ```

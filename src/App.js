@@ -111,7 +111,7 @@ function App() {
           score={score}
         />
       )}
-      {gameStage === "end" && <EndScreen retry={retry} />}
+      {gameStage === "end" && <EndScreen retry={retry} score={score} />}
     </div>
   );
 }
