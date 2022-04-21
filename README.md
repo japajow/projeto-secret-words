@@ -635,6 +635,7 @@ setGuesses((actualGuesses) => actualGuesses - 1);
 Agora usamos o useEffect para quando as tentativas ficar 0 ele muda o estagio
 
 ```tsx
+//verificando se as tentativas terminaram
 useEffect(() => {
   if (gussess <= 0) {
     // aqui temos que resetar todos os estados
@@ -703,4 +704,62 @@ h2 span {
   color: #ecfa00;
   font-size: 1.5em;
 }
+```
+
+## Condicaop de vitoria do jogo
+
+```tsx
+// checando se foi vitoria
+useEffect(() => {
+  // pegando as letras e transformando em letras unicas ou seja eliminando letras repetidas
+  const uniqueLetters = [...new Set(letters)];
+
+  // condicao de vitorias
+
+  if (guessedLetter.length === uniqueLetters.length) {
+    setScore((actualScore) => (actualScore += 100));
+    // chamamso novamente o startGame(); para um nonvo jogo ser continuado
+    startGame();
+  }
+}, []);
+```
+
+envolvendo o startGame() com useCallback() , como estamos chamando ele no useEffect() pode acontecer que de um loopinfinito
+
+```tsx
+const startGame = useCallback(() => {
+  //pick word and pick category
+  const { word, category } = pickWordAnCategory();
+
+  let wordLetters = word.split("");
+  wordLetters = wordLetters.map((l) => l.toLowerCase());
+
+  setPickedWord(word);
+  setPickedCategory(category);
+  setLetters(wordLetters);
+  setGuesses(3);
+  clearLetterStates();
+
+  setGameStage(stages[1].name);
+}, [pickWordAnCategory]);
+```
+
+como passamos como dependencia do useCallback precisamos envolver o pickWordAnCategory tambem com useCallback
+
+```tsx
+
+    const pickWordAnCategory = useCallback(() => {
+    const categories = Object.keys(words);
+    const category =
+      categories[Math.floor(Math.random() * Object.keys(categories).length)];
+
+    const word =
+      words[category][Math.floor(Math.random() * words[category].length)];
+
+    return { word, category };
+  },[words]);
+
+
+  Envolvendo agora o [words] como dependencia
+
 ```
