@@ -1,5 +1,5 @@
 import React from "react";
-
+import './GameScreen.css';
 export const GameScreen = ({ verifyLetter }) => {
   return (
     <div className="game">
@@ -10,7 +10,7 @@ export const GameScreen = ({ verifyLetter }) => {
       <h3 className="tip">
         Dica sobre a palavra: <span>Dica...</span>
       </h3>
-      <div className="wordConteiner">
+      <div className="wordContainer">
         <span className="letter">A</span>
         <span className="blackSquare"></span>
       </div>
