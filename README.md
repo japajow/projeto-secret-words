@@ -588,25 +588,84 @@ const verifyLetter = (letter) => {
 ## Processando letras validas e invalidas
 
 ```tsx
-
 // padronizando a letra para ser minuscula
 const normalizedLetter = letter.toLowerCase();
 
 // verificando se ja existe a letra que foi digitada
-if(guessesLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)){
-    // se entrar em uma dessas condicao retornamos
-    return;
+if (
+  guessesLetters.includes(normalizedLetter) ||
+  wrongLetters.includes(normalizedLetter)
+) {
+  // se entrar em uma dessas condicao retornamos
+  return;
 }
 
 //incluindo as letras que foi acertadas ou erradas
 
-if(letters.includes(normalizedLetter)){
-    //setando as letras acertadas
-    setGuessedLetters((actualGuessedLetters)=> [...actualGuessedLetters,normalizedLetter])
-}else{
-    //setando as letras erradas
-     setWrongLetters((actualWrongLetters)=>[ ...actualWrongLetters,normalizedLetter])
+if (letters.includes(normalizedLetter)) {
+  //setando as letras acertadas
+  setGuessedLetters((actualGuessedLetters) => [
+    ...actualGuessedLetters,
+    normalizedLetter,
+  ]);
+} else {
+  //setando as letras erradas
+  setWrongLetters((actualWrongLetters) => [
+    ...actualWrongLetters,
+    normalizedLetter,
+  ]);
 }
+```
 
+## Logica para o fim de jogo
 
+diminuindo as tentativas
+
+```tsx
+// if(letters.includes(normalizedLetter)){
+//     //setando as letras acertadas
+//     setGuessedLetters((actualGuessedLetters)=> [...actualGuessedLetters,normalizedLetter])
+// }else{
+//setando as letras erradas
+//      setWrongLetters((actualWrongLetters)=>[ ...actualWrongLetters,normalizedLetter])
+setGuesses((actualGuesses) => actualGuesses - 1);
+// }
+```
+
+Agora usamos o useEffect para quando as tentativas ficar 0 ele muda o estagio
+
+```tsx
+useEffect(() => {
+  if (gussess <= 0) {
+    // aqui temos que resetar todos os estados
+
+    setGameStage(stages[2].name);
+  }
+}, [guesses]);
+```
+
+Criando uma funcao para resetar o estado do jogo
+
+```tsx
+const clearLetterStates = () => {
+  setGuessedLetter([]);
+  setWrongLetters([]);
+};
+
+// useEffect(() => {
+//   if (gussess <= 0) {
+clearLetterStates();
+//     // aqui temos que resetar todos os estados
+
+//     setGameStage(stages[2].name);
+//   }
+// }, [guesses]);
+
+// setando estado do retry
+
+const retry = () => {
+  setScore(0);
+  setGuesses(guessQty);
+  setGameStage(stages[0].name);
+};
 ```
